@@ -10,12 +10,10 @@ OBJS_CLIENT := $(SRCS_CLIENT:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) server client
-
-$(LIBFT):
-	cd ft_printf && make
+$(NAME): server client
 
 server: server.o
+	cd ft_printf && make
 	$(GCC) $(FLAGS) $(OBJS_SERVER) $(LIBRARIES) -o server
 
 client: client.o
@@ -28,7 +26,7 @@ clean:
 
 fclean: clean
 	cd ft_printf && make fclean
-	rm server client
+	rm -fr server client
 
 re: fclean all
 

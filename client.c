@@ -19,12 +19,11 @@ void	send_bytes(char c, int pid)
 	bit = 0;
 	while (bit < 8)
 	{
-		if (c & (1 << bit))
+		if (c & (1 << bit++))
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
-		bit++;
+		usleep(300);
 	}
 }
 
@@ -32,7 +31,7 @@ void	handle_response(int signum)
 {
 	if (signum == SIGUSR2)
 	{
-		ft_printf("Message Sent Successfully!");
+		ft_printf("Message Sent Successfully!\n");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -49,10 +48,8 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	pid = ft_atoi(argv[1]);
-	kill(pid, SIGUSR1);
-	while (argv[2][i])
-	{
-		send_bytes(argv[2][i], pid);
-		i++;
-	}
+	signal(SIGUSR2, handle_response);
+	while (1)
+		send_bytes(argv[2][i++], pid);
+	return (0);
 }

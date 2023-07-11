@@ -6,13 +6,13 @@
 /*   By: gvigilan <gvigilan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:00:55 by gvigilan          #+#    #+#             */
-/*   Updated: 2023/06/13 16:00:55 by gvigilan         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:28:36 by gvigilan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-__pid_t	print_pid(void)
+void	print_pid(void)
 {
 	int	pid;
 
@@ -23,11 +23,6 @@ __pid_t	print_pid(void)
 		exit(1);
 	}
 	ft_printf("Server PID: %d\n", pid);
-}
-
-void	handle_confirm(int sig)
-{
-	ft_printf("Signal %d received!", sig);
 }
 
 static void	msg_handler(int sig_no, siginfo_t *info, void *context)
@@ -68,7 +63,6 @@ int	main()
 	sa.sa_sigaction = msg_handler;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	signal(SIGUSR1, handle_confirm);
 	while (1)
 		pause();
 	return (0);
