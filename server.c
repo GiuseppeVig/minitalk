@@ -6,7 +6,7 @@
 /*   By: gvigilan <gvigilan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:00:55 by gvigilan          #+#    #+#             */
-/*   Updated: 2023/07/11 19:28:36 by gvigilan         ###   ########.fr       */
+/*   Updated: 2023/07/12 14:48:20 by gvigilan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	msg_handler(int sig_no, siginfo_t *info, void *context)
 	}
 }
 
-int	main()
+int	main(void)
 {
 	struct sigaction		sa;
 
